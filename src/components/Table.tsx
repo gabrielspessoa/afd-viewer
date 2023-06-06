@@ -123,6 +123,40 @@ export const Table = ({ columns, data }: { columns: any; data: any }) => {
           </tbody>
         </table>
       </div>
+      <div className='flex items-center mt-3'>
+        <Button
+          variant='icon'
+          onClick={() => table.setPageIndex(0)}
+          disabled={!table.getCanPreviousPage()}
+        >
+          <CaretDoubleLeft />
+        </Button>
+        <Button
+          variant='icon'
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          <CaretLeft />
+        </Button>
+        <Button
+          variant='icon'
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          <CaretRight />
+        </Button>
+        <Button
+          variant='icon'
+          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+          disabled={!table.getCanNextPage()}
+        >
+          <CaretDoubleRight />
+        </Button>
+        <span className='ml-2'>
+          Página {table.getState().pagination.pageIndex + 1} de{' '}
+          {table.getPageCount()}
+        </span>
+      </div>
     </>
   );
 };

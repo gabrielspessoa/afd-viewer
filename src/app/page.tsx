@@ -26,8 +26,12 @@ export default function Home() {
       'text/plain': ['.txt'],
     },
     maxFiles: 1,
+    onDrop: () => {
+      toast.loading('Lendo arquivo', { id: 'loading' });
+    },
     onDropAccepted: (files) => {
       setFile(files[0]);
+      toast.success('Arquivo lido com sucesso', { id: 'loading' });
       router.push('/view');
     },
   });

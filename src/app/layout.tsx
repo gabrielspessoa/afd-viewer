@@ -1,11 +1,8 @@
-'use client';
-
 import { twMerge } from 'tailwind-merge';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { createContext, useState } from 'react';
-import { FileContext } from '@/contexts/FileContext';
 import { Toaster } from 'react-hot-toast';
+import Providers from '@/components/Providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,9 +16,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [file, setFile] = useState<File | null>(null);
   return (
-    <html lang='pt'>
+    <html lang='pt' className='overflow-y-scroll'>
       <body
         className={twMerge(
           inter.className,
@@ -33,9 +29,7 @@ export default function RootLayout({
             className: '!bg-zinc-700 !text-zinc-100',
           }}
         />
-        <FileContext.Provider value={{ file, setFile }}>
-          {children}
-        </FileContext.Provider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

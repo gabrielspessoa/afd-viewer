@@ -8,12 +8,15 @@ import { Table } from '@/components/Table';
 import { createColumnHelper } from '@tanstack/react-table';
 import parse from 'date-fns/parse';
 import { format } from 'date-fns';
+import { Ubuntu } from 'next/font/google';
 
 interface Record {
   nsr: string;
   date: Date;
   pis: string;
 }
+
+const ubuntu = Ubuntu({ weight: ['400', '500'], subsets: ['latin'] });
 
 export default function ViewPage() {
   const { file, setFile } = useContext(FileContext);
@@ -112,8 +115,13 @@ export default function ViewPage() {
   }, [file, router, parseRecords]);
 
   return (
-    <div className='flex flex-col p-4'>
-      <div className='flex flex-col items-center mb-3'>
+    <div className='flex flex-col w-full max-w-2xl p-4 mx-auto'>
+      <div
+        className={
+          'flex flex-col items-center mb-3 text-lg mt-11 border border-zinc-200 border-dashed rounded-md py-3 ' +
+          ubuntu.className
+        }
+      >
         <p>
           CNPJ: <strong>{formatCNPJ(businessInfo.cnpj)}</strong>
         </p>
@@ -121,7 +129,7 @@ export default function ViewPage() {
           Nome: <strong>{businessInfo.name}</strong>
         </p>
       </div>
-      <div className='w-full max-w-3xl mx-auto'>
+      <div className=''>
         <Table columns={defaultColumns} data={allRecords} />
       </div>
     </div>
